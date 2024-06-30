@@ -7,10 +7,10 @@ import { Suspense } from "react";
 import { Analytics as VercelAnalytics } from "@vercel/analytics/react";
 
 export const metadata = {
-  title: "Precedent - Building blocks for your Next.js project",
+  title: "Centroide - Optimiza tu experiencia de lectura de noticias.",
   description:
-    "Precedent is the all-in-one solution for your Next.js project. It includes a design system, authentication, analytics, and more.",
-  metadataBase: new URL("https://precedent.dev"),
+    "Centroide te permite ahorrar tiempo al leer resúmenes de las mejores noticias de las ùltimas 24 horas configuradas para ti.",
+  metadataBase: new URL("https://centroide.cl"),
 };
 
 export default async function RootLayout({
