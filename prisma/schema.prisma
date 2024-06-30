@@ -1,16 +1,35 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
 generator client {
   provider = "prisma-client-js"
 }
 
 datasource db {
-  provider = "postgresql"
-  url = env("POSTGRES_PRISMA_URL") // uses connection pooling
-  directUrl = env("POSTGRES_URL_NON_POOLING") // uses a direct connection
+  provider  = "postgresql"
+  url       = env("POSTGRES_PRISMA_URL")
+  directUrl = env("POSTGRES_URL_NON_POOLING")
 }
 
+model articles {
+  article_hash      String          @id
+  article_title     String?
+  category          String?
+  publish_date      DateTime?       @db.Timestamp(6)
+  article_body      String?
+  raw_content       String?
+  source_entity     String?
+  article_link      String?
+  generated_summary String?
+  negative_score    Decimal?        @db.Decimal
+  importance_score  Decimal?        @db.Decimal
+  view_count        Decimal?        @db.Decimal
+  header_images     header_images[]
+}
+
+model header_images {
+  article_hash String?
+  image_hash   String    @id
+  s3_link      String?
+  articles     articles? @relation(fields: [article_hash], references: [article_hash], onDelete: NoAction, onUpdate: NoAction)
+}
 
 model Account {
   id                 String  @id @default(cuid())
