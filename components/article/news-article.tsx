@@ -12,6 +12,13 @@ const NewsArticle = ({ article, image_src }: { article: Article, image_src: stri
 
   const [active, setActive] = useState(false);
 
+  /*
+    ## Title\n\n
+    * Bulletpoint\n
+   */
+  const articleParts = generated_summary.split('\n');
+  const title = articleParts[0].replaceAll('#', '');
+
   return (
     <motion.div
       initial={{ opacity: 0, y: 20 }}
@@ -20,30 +27,48 @@ const NewsArticle = ({ article, image_src }: { article: Article, image_src: stri
       className="p-4 bg-white shadow-lg rounded-md mb-4"
     >
       <div className="flex flex-col items-center">
-
-        {active ?
-          <div className="flex flex-row justify-between w-full p-4">
-            <div dangerouslySetInnerHTML={{ __html: htmlSummary }} className="prose text-sm font-normal text-left" />
-            <div>
-              {image_src && <Image alt={article_title} width={240} height={120} className="w-64 h-64 object-cover rounded-md mb-4" src={image_src} />}
+        {active ? (
+          <div className="flex flex-col md:flex-row justify-between w-full p-4">
+            {image_src && (
+              <div className="w-full md:w-auto mb-4 md:mb-0 md:mr-4">
+                <Image
+                  alt={article_title}
+                  width={240}
+                  height={120}
+                  className="w-full md:w-72 h-64 object-cover rounded-md"
+                  src={image_src}
+                />
+              </div>
+            )}
+            <div className="flex-grow">
+              <div
+                dangerouslySetInnerHTML={{ __html: htmlSummary }}
+                className="prose text-sm font-normal text-left"
+              />
             </div>
           </div>
-          :
-
+        ) : (
           <div className="flex flex-row justify-between w-full p-4">
-            <div className="font-black text-xl m-6"><button onClick={() => setActive(!active)}>{article_title}</button></div>
+            <div className="font-black text-xl m-6">
+              <button onClick={() => setActive(!active)}>{title}</button>
+            </div>
             <div></div>
           </div>
-        }
-
-        <div className="flex flex-row justify-between w-full px-4">
-          <div className="text-sm text-gray-600 mb-2">{new Date(publish_date).toLocaleString()}</div>
-          <a href={article_link} target="_blank" rel="noreferrer" className="text-sm text-blue-600 mb-4">{source_entity + "/" + category}</a>
+        )}
+        <div className="flex flex-col sm:flex-row justify-between w-full px-4">
+          <div className="text-sm text-gray-600 mb-2 sm:mb-0">
+            {new Date(publish_date).toLocaleString()}
+          </div>
+          <a
+            href={article_link}
+            target="_blank"
+            rel="noreferrer"
+            className="text-sm text-blue-600"
+          >
+            {source_entity + "/" + category}
+          </a>
         </div>
-
       </div>
-
-
     </motion.div>
   );
 };
