@@ -28,29 +28,39 @@ const NewsArticle = ({ article, image_src }: { article: Article, image_src: stri
     >
       <div className="flex flex-col items-center">
         {active ? (
-          <div className="flex flex-col md:flex-row justify-between w-full p-4">
-            {image_src && (
-              <div className="w-full md:w-auto mb-4 md:mb-0 md:mr-4">
-                <Image
-                  alt={article_title}
-                  width={240}
-                  height={120}
-                  className="w-full md:w-72 h-64 object-cover rounded-md"
-                  src={image_src}
+          <motion.div
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
+            className="bg-white"
+          >
+            <div className="flex flex-col md:flex-row justify-between w-full p-4">
+              {image_src && (
+                <div className="w-full md:w-auto mb-4 md:mb-0 md:mr-4">
+                  <Image
+                    alt={article_title}
+                    width={240}
+                    height={120}
+                    className="w-full md:w-72 h-64 object-cover rounded-md"
+                    src={image_src}
+                  />
+                </div>
+              )}
+              <div className="flex-grow">
+                <div
+                  dangerouslySetInnerHTML={{ __html: htmlSummary }}
+                  className="prose text-sm font-normal text-left"
                 />
               </div>
-            )}
-            <div className="flex-grow">
-              <div
-                dangerouslySetInnerHTML={{ __html: htmlSummary }}
-                className="prose text-sm font-normal text-left"
-              />
             </div>
-          </div>
+          </motion.div>
         ) : (
           <div className="flex flex-row justify-between w-full p-4">
-            <div className="font-black text-xl m-6">
-              <button onClick={() => setActive(!active)}>{title}</button>
+            <div className="font-black text-xl m-6 flex items-center">
+              <button onClick={() => setActive(!active)} className="flex items-center">
+                <span>{title}</span>
+                <span className="ml-2 text-gray-500 text-2xl">+</span>
+              </button>
             </div>
             <div></div>
           </div>

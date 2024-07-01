@@ -26,7 +26,7 @@ export default async function OG() {
         }}
       >
         <img
-          src={`https://${process.env.VERCEL_URL || "precedent.dev"}/logo_centroide.png`}
+          src={`https://centroide-web.vercel.app/logo_centroide.png`}
           alt="Precedent Logo"
           tw="w-20 h-20 mb-4 opacity-95"
         />
