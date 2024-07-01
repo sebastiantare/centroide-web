@@ -10,7 +10,7 @@ export const metadata = {
   title: "Centroide - Optimiza tu experiencia de lectura de noticias.",
   description:
     "Centroide te permite ahorrar tiempo al leer resúmenes de las mejores noticias de las ùltimas 24 horas configuradas para ti.",
-  metadataBase: new URL("https://centroide.cl"),
+  metadataBase: new URL("https://centroide-web.vercel.app/"),
 };
 
 export default async function RootLayout({
